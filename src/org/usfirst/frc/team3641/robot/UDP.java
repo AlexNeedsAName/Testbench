@@ -6,15 +6,13 @@ import java.net.InetAddress;
 
 public class UDP
 {
-	public static UDP driverStation;
-	
-	private int port;
-	private InetAddress address;
-	private DatagramSocket socket;
-	private DatagramPacket packet;
-	private byte[] buf;
+	static int port;
+	static InetAddress address;
+	static DatagramSocket socket;
+	static DatagramPacket packet;
+	static byte[] buf;
 
-	public UDP(String IP, int Port)	//Sets the vars and opens a connection
+	public UDP(String IP, int Port)	//Sets the vars and opens a connection to the pi
 	{
 		try 
 		{
@@ -24,23 +22,33 @@ public class UDP
 			buf = new byte[256];
 			socket.setSoTimeout(1);
 		}
-		catch(Exception e) 
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
 	}
-	
-	public void sendData(String data)
+	public String flush(String oldResponse)
+	{
+		String response = getData();
+		if(response!=null)
+		{
+			return flush(response);
+		}
+		else return oldResponse;
+	}
+
+	public void sendData(String data) //Sends the request to the pi
 	{
 		try
 		{
-			buf = data.getBytes();											//Converts the String to a byte array
-			packet = new DatagramPacket(buf, buf.length, address, port);	//Makes a packet from the byte array, address, and port
-			socket.send(packet);											//Send the packet :D
+			
+			buf = data.getBytes();	//Converts the String to a byte array
+			packet = new DatagramPacket(buf, buf.length, address, port); //Makes a packet from the byte array, address, and port
+			socket.send(packet);	//Send the packet :D
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	public String getData()
@@ -56,14 +64,9 @@ public class UDP
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			//System.out.println(e.getMessage());
 			return null;
 		}	
-	}
-	
-	public static void writeToConsole(String message)
-	{
-		driverStation.sendData(":PRINT:"+message);
 	}
 
 }

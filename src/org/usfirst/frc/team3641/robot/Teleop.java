@@ -20,7 +20,7 @@ public class Teleop
 	{
 		dualshock.readValues();
 		
-		DriveBase.driveTank(dualshock.getLeftY(), dualshock.getRightX());
+		DriveBase.driveArcade(dualshock.getLeftY(), dualshock.getRightX());
 	}
 	
 }

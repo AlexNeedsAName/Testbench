@@ -18,11 +18,26 @@ public class DriveBase
 		right = new CANTalon(Constants.RIGHT_TALON);
 	}
 	
-	public static void driveTank(double power, double rotation)
+	public static void driveArcade(double power, double rotation)
 	{
 		double leftPower = power + rotation;
 		double rightPower = power - rotation;
 		
+		double maxPower;
+		if(leftPower > rightPower) maxPower = leftPower;
+		else maxPower = rightPower;
+		
+		if(maxPower > 1)
+		{
+			leftPower/= maxPower;
+			rightPower/= maxPower;
+		}
+		
+		left.set(leftPower);
+		right.set(rightPower);
+	}
+	public static void driveTank(double leftPower, double rightPower)
+	{
 		double maxPower;
 		if(leftPower > rightPower) maxPower = leftPower;
 		else maxPower = rightPower;
