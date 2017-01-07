@@ -13,12 +13,13 @@ public class Teleop
 	
 	private Teleop()
 	{
-		dualshock = new PS4(1);
+		dualshock = new PS4(Constants.PS4_PORT);
 	}
 	
 	public static void run()
 	{
 		dualshock.readValues();
+		
 	}
 	
 }
