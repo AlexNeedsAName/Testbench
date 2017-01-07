@@ -20,8 +20,16 @@ public class Teleop
 	{
 		dualshock.readValues();
 		
-		DriveBase.driveArcade(dualshock.getLeftY(), dualshock.getRightX());
+		//Put any functions that should block normal drive base input here:
+		if(dualshock.getCircleButton()) Tracking.target();
+		else
+		{
+			Tracking.resetState();
+			DriveBase.driveArcade(dualshock.getLeftY(), dualshock.getRightX());
+		}
 		
+		//Put any functions that should not interfere with the drive base here:
+		Debug.logBatteryVoltage();
 	}
 	
 }

@@ -29,5 +29,7 @@ public class Constants
 	public static final int CAMERA_CENTER = 160;
 	public static final double DEGREES_PER_PIXEL = 0.2140625;
 	
+	public static final double RADIUS_TO_CM = 0; //TODO: Find this Value
+	
 	
 }

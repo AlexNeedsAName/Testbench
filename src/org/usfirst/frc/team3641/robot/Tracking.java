@@ -7,7 +7,7 @@ public class Tracking
 	private static PID TrackingPID;
 	
 	private static int center;
-	private static double angleOff, targetAngle;
+	private static double angleOff, targetAngle, distance;
 	
 	private static int visionState;
 	
@@ -37,7 +37,8 @@ public class Tracking
 				if(response != null && response.contains(";"))
 				{
 					String data[] = response.split(";");
-					center = Integer.parseInt(data[0]);	//Radius is data[1] if we need it
+					center = Integer.parseInt(data[0]);
+					distance = Integer.parseInt(data[1]) * Constants.RADIUS_TO_CM;
 					visionState = Constants.TURN_TO_TARGET;
 				}
 				break;
@@ -48,8 +49,18 @@ public class Tracking
 				double error = calcError(targetAngle, DriveBase.getAngle());
 				if(Math.abs(error) < Constants.ACCEPTABLE_ERROR) visionState = Constants.TRACKED;
 				else DriveBase.driveArcade(0, TrackingPID.pid(error));
+				//Shooter.Prep(distance);
+				break;
+			case Constants.TRACKED:
+				//Shooter.Fire(distance);
+				break;
 		}
 		
+	}
+		
+	public static void resetState()
+	{
+		visionState = Constants.SEND_REQUEST;
 	}
 	
 	private static double calcError(double target, double current)
