@@ -51,4 +51,9 @@ public class DriveBase
 		left.set(leftPower);
 		right.set(rightPower);
 	}
+	
+	public static double getAngle()	//TODO: Add gyro
+	{
+		return 0;
+	}
 }
