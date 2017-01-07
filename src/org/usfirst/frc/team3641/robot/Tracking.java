@@ -4,10 +4,10 @@ public class Tracking
 {
 	private static Tracking instance;
 	private static UDP pi;
-	private static PID TrackingPID;
+	private static PID GearTrackingPID, FuelTrackingPID;
 	
 	private static int center;
-	private static double angleOff, targetAngle, distance;
+	private static double distance, error;
 	
 	private static int visionState;
 	
@@ -20,10 +20,11 @@ public class Tracking
 	private Tracking()
 	{
     	pi = new UDP(Constants.PI_IP_ADDR, Constants.PI_PORT);
-    	TrackingPID = new PID(Constants.TRACKING_KP, Constants.TRACKING_KI);
+    	GearTrackingPID = new PID(Constants.GEAR_TRACKING_KP, Constants.GEAR_TRACKING_KI);
+    	FuelTrackingPID = new PID(Constants.FUEL_TRACKING_KP, Constants.FUEL_TRACKING_KI);
 	}
 	
-	public static void target()
+	public static int target(int mode)
 	{
 		switch(visionState)
 		{
@@ -39,22 +40,34 @@ public class Tracking
 					String data[] = response.split(";");
 					center = Integer.parseInt(data[0]);
 					distance = Integer.parseInt(data[1]) * Constants.RADIUS_TO_CM;
-					visionState = Constants.TURN_TO_TARGET;
+					if(mode == Constants.FUEL_MODE) visionState = Constants.TURN_TO_TARGET;
+					else visionState = Constants.SLIDE_GEAR_MECHANISM;
 				}
 				break;
 				
 			case Constants.TURN_TO_TARGET:
-				angleOff = (center - Constants.CAMERA_CENTER) * Constants.DEGREES_PER_PIXEL;
-				targetAngle = DriveBase.getAngle() + angleOff;
-				double error = calcError(targetAngle, DriveBase.getAngle());
-				if(Math.abs(error) < Constants.ACCEPTABLE_ERROR) visionState = Constants.TRACKED;
-				else DriveBase.driveArcade(0, TrackingPID.pid(error));
+				double angleOff = (center - Constants.CAMERA_CENTER) * Constants.DEGREES_PER_PIXEL;
+				double targetAngle = DriveBase.getAngle() + angleOff;
+				error = calcError(targetAngle, DriveBase.getAngle());
+				if(Math.abs(error) < Constants.ACCEPTABLE_FUEL_ERROR) visionState = Constants.TRACKED_FUEL;
+				else DriveBase.driveArcade(0, FuelTrackingPID.pid(error));
 				//Shooter.Prep(distance);
 				break;
-			case Constants.TRACKED:
+			case Constants.TRACKED_FUEL:
 				//Shooter.Fire(distance);
 				break;
+				
+			case Constants.SLIDE_GEAR_MECHANISM:
+				error = center - Constants.CAMERA_CENTER;
+				if(Math.abs(error) < Constants.ACCEPTABLE_GEAR_ERROR) visionState = Constants.TRACKED_GEAR;
+				//else GearMechanism.set(GearTrackingPID.pid(error));
+				break;
+			case Constants.TRACKED_GEAR:
+				//Light up a square on the smart dashboard or something
+				break;
 		}
+		
+		return visionState;
 		
 	}
 		

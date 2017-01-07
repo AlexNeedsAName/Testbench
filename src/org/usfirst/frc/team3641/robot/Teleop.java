@@ -4,6 +4,7 @@ public class Teleop
 {
 	private static Teleop instance;
 	private static PS4 dualshock;
+	private static Extreme3DPro operator;
 	
 	public static Teleop getInstance()
 	{
@@ -14,6 +15,7 @@ public class Teleop
 	private Teleop()
 	{
 		dualshock = new PS4(Constants.PS4_PORT);
+		operator = new Extreme3DPro(Constants.OPERATOR_PORT);
 	}
 	
 	public static void run()
@@ -21,7 +23,8 @@ public class Teleop
 		dualshock.readValues();
 		
 		//Put any functions that should block normal drive base input here:
-		if(dualshock.getCircleButton()) Tracking.target();
+		if(dualshock.getCircleButton()) Tracking.target(Constants.GEAR_MODE);
+		else if(dualshock.getTriangleButton()) Tracking.target(Constants.FUEL_MODE);
 		else
 		{
 			Tracking.resetState();
@@ -29,7 +32,6 @@ public class Teleop
 		}
 		
 		//Put any functions that should not interfere with the drive base here:
-		Debug.logBatteryVoltage();
 	}
 	
 }
