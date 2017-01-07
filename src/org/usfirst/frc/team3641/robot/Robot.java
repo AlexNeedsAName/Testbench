@@ -11,6 +11,7 @@ public class Robot extends IterativeRobot
     	Teleop.getInstance();
     	DriveBase.getInstance();
     	Tracking.getInstance();
+    	PDP.getInstance();
 	}
     
     public void autonomousInit()
