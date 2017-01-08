@@ -21,6 +21,7 @@ public class Teleop
 	public static void run()
 	{
 		dualshock.readValues();
+		DriveBase.readGyro();
 		
 		//Put any functions that should block normal drive base input here:
 		if(dualshock.getCircleButton()) Tracking.target(Constants.GEAR_MODE);

@@ -1,10 +1,14 @@
 package org.usfirst.frc.team3641.robot;
 import com.ctre.CANTalon;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SerialPort;
 
 public class DriveBase
 {
 	private static DriveBase instance;
 	private static CANTalon left, right;
+	private static AHRS gyro;
+	private static double angle;
 	
 	public static DriveBase getInstance()
 	{
@@ -14,6 +18,7 @@ public class DriveBase
 	
 	private DriveBase()
 	{
+		gyro = new AHRS(SerialPort.Port.kMXP);
 		left = new CANTalon(Constants.LEFT_TALON);
 		right = new CANTalon(Constants.RIGHT_TALON);
 	}
@@ -52,8 +57,14 @@ public class DriveBase
 		right.set(rightPower);
 	}
 	
-	public static double getAngle()	//TODO: Add gyro
+	public static void readGyro()
 	{
-		return 0;
+		angle = gyro.getAngle(); 
 	}
+	
+	public static double getAngle()
+	{
+		return angle;
+	}
+	
 }

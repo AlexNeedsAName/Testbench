@@ -7,7 +7,7 @@ public class Robot extends IterativeRobot
 {
 	
 	public void robotInit()
-	{
+	{		
     	Teleop.getInstance();
     	DriveBase.getInstance();
     	Tracking.getInstance();
