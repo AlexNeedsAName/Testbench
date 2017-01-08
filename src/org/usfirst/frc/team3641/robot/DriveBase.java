@@ -93,5 +93,11 @@ public class DriveBase
 		if(mode == Constants.REVERSE_MODE) reverseMode = true;
 		else reverseMode = false;
 	}
+
+	public static double readEncoder()
+	{
+		//TODO: Add encoder
+		return 0;
+	}
 	
 }

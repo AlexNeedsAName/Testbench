@@ -44,6 +44,17 @@ public class Constants
 	public static final double DEGREES_PER_PIXEL = 0.2140625;
 	
 	public static final double RADIUS_TO_CM = 0; //TODO: Find this Value
+
+	public static final double ENCODER_TO_CM = 0; //TODO: Build Robot and find Value
+	
+	//Auton Modes
+	public static final int START = 0;
+	public static final int DRIVE_FORWARDS = 1;
+	public static final int DONE = 2;
+	
+	public static final int DO_NOTHING = 0;
+	public static final int CROSS_BASELINE = 1;
+
 	
 	
 }
