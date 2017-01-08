@@ -23,6 +23,9 @@ public class Teleop
 		dualshock.readValues();
 		DriveBase.readGyro();
 		
+		if(dualshock.getLeftBumper()) DriveBase.setDriveMode(Constants.REVERSE_MODE);
+		else if (dualshock.getRightBumper()) DriveBase.setDriveMode(Constants.NORMAL_MODE);
+		
 		//Put any functions that should block normal drive base input here:
 		if(dualshock.getCircleButton()) Tracking.target(Constants.GEAR_MODE);
 		else if(dualshock.getTriangleButton()) Tracking.target(Constants.FUEL_MODE);

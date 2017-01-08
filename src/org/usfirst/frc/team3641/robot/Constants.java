@@ -2,12 +2,17 @@ package org.usfirst.frc.team3641.robot;
 
 public class Constants
 {
+	public static final int REVERSE_MODE = 1;
+	public static final int NORMAL_MODE = 2;
+	
 	public static final int PS4_PORT = 1;
 	public static final int OPERATOR_PORT = 2;
 	
 	//Talons
 	public static final int LEFT_TALON = 1;
-	public static final int RIGHT_TALON = 2;
+	public static final int LEFT_SLAVE_TALON = 2;
+	public static final int RIGHT_TALON = 3;
+	public static final int RIGHT_SLAVE_TALON = 4;
 	
 	//UDP Constants
 	public static final int PI_PORT = 5800; //Only ports 5800-5810 are open this year :(
