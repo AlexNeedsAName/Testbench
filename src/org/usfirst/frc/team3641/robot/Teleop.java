@@ -32,7 +32,14 @@ public class Teleop
 		else
 		{
 			Tracking.resetState();
-			DriveBase.driveArcade(dualshock.getLeftY(), dualshock.getRightX());
+			if(Constants.usingPMW)
+			{
+				DriveBase.driveArcade(operator.getZAxis(), operator.getYAxis());
+			} 
+			else
+			{
+				DriveBase.driveArcade(dualshock.getLeftY(), dualshock.getRightX());
+			}
 		}
 		
 		//Put any functions that should not interfere with the drive base here:
