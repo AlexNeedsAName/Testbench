@@ -11,7 +11,7 @@ public class Constants
 	public static final int NORMAL_MODE = 2;
 	
 	public static final int PS4_PORT = 1;
-	public static final int OPERATOR_PORT = 2;
+	public static final int OPERATOR_PORT = 0;
 		
 	//Talons
 	public static final int LEFT_TALON = 1;
@@ -65,6 +65,7 @@ public class Constants
 	
 	public static final int DO_NOTHING = 0;
 	public static final int CROSS_BASELINE = 1;
+	public static final int LINE_ALIGN = 2;
 
 	
 	

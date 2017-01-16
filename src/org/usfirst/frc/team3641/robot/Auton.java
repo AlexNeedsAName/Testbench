@@ -9,6 +9,8 @@ public class Auton
 	private static double initalEncoder;
 	private static double finalEncoder;
 	
+	private static boolean turn = false;
+	
 	public static Auton getInstance()
 	{
 		if(instance == null) instance = new Auton();
@@ -28,6 +30,12 @@ public class Auton
 				break;
 			case Constants.CROSS_BASELINE:
 				crossBaseline();
+				break;
+			case Constants.LINE_ALIGN:
+				if (turn == false) {
+		    		DriveBase.turnDegrees(4, 2);
+		    		turn = true;
+		    	}
 				break;
 
 		}

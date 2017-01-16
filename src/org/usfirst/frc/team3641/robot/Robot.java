@@ -8,7 +8,7 @@ public class Robot extends IterativeRobot
 	
 	public void robotInit()
 	{	
-		Constants.runningAleksBot = SmartDashboard.getBoolean("Running Alek's Bot?", false);
+		Constants.runningAleksBot = SmartDashboard.getBoolean("Running Alek's Bot?", true);
     	Teleop.getInstance();
     	DriveBase.getInstance();
     	Tracking.getInstance();
@@ -22,6 +22,7 @@ public class Robot extends IterativeRobot
 
     public void autonomousPeriodic()
     {
+    	Auton.run(2);
 
     }
 

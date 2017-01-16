@@ -161,12 +161,12 @@ public class DriveBase
         	if (gyroAngle < inputDegrees-errorMargin) 
         	{
         		//Turn right
-        		driveArcade(0.0, -0.85);
+        		setMotors(0.7, 0.8);
         	}
         	if (gyroAngle > inputDegrees+errorMargin) 
         	{
         		//Turn left
-        		driveArcade(0.0, 0.85);
+        		setMotors(-0.7, -0.8);
         	}
         	gyroAngle = getAngle();
             System.out.println(gyroAngle);
