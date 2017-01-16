@@ -11,7 +11,7 @@ public class DriveBase
 	private static CANTalon left, leftSlave, right, rightSlave;
 	private static Victor PWMleft, PWMleftSlave, PWMright, PWMrightSlave;
 	private static AHRS gyro;
-	private static ADXRS450_Gyro SPIGyro;
+	private static ADXRS450_Gyro SPIgyro;
 	private static double angle;
 	private static boolean highGear = false;
 	private static boolean autoShift = true;
@@ -34,7 +34,7 @@ public class DriveBase
 			PWMright = new Victor(Constants.RIGHT_VICTOR);
 			PWMrightSlave = new Victor(Constants.RIGHT_SLAVE_VICTOR);
 			
-			SPIGyro = new ADXRS450_Gyro();
+			SPIgyro = new ADXRS450_Gyro();
 		}
 		left = new CANTalon(Constants.LEFT_TALON);
 		leftSlave = new CANTalon(Constants.LEFT_SLAVE_TALON);
@@ -101,7 +101,7 @@ public class DriveBase
 	{
 		if(Constants.runningAleksBot)
 		{
-			angle = SPIGyro.getAngle();
+			angle = SPIgyro.getAngle();
 		}
 		else
 		{
@@ -118,7 +118,7 @@ public class DriveBase
 	{
 		if(Constants.runningAleksBot)
 		{
-			SPIGyro.reset();
+			SPIgyro.reset();
 		}
 		else
 		{
@@ -151,9 +151,8 @@ public class DriveBase
 	
 	public static void turnDegrees(double inputDegrees, double errorMargin) 
 	{
-		//Now loop until you turn the perfect amount!
-        SPIGyro.reset(); //resetGyro();
-        double gyroAngle = SPIGyro.getAngle();//getAngle();
+		resetGyro(); //resetGyro();
+        double gyroAngle = getAngle();
         
         while (gyroAngle < inputDegrees-errorMargin || gyroAngle > inputDegrees+errorMargin) 
         {
@@ -167,7 +166,7 @@ public class DriveBase
         		//Turn left
         		setMotors(-0.7, -0.8);
         	}
-        	gyroAngle = SPIGyro.getAngle(); //getAngle();
+        	gyroAngle = getAngle();
             System.out.println(gyroAngle);
         }
         setMotors(0, 0);
