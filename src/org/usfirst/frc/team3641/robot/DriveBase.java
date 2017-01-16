@@ -114,6 +114,18 @@ public class DriveBase
 		return angle;
 	}
 	
+	public static void resetGyro()
+	{
+		if(Constants.runningAleksBot)
+		{
+			SPIGyro.reset();
+		}
+		else
+		{
+			gyro.reset();
+		}
+	}
+	
 	public static void setDriveMode(int mode)
 	{
 		if(mode == Constants.REVERSE_MODE) reverseMode = true;
@@ -135,6 +147,30 @@ public class DriveBase
 	{
 		//TODO: Add encoder
 		return 0;
+	}
+	
+	public static void turnDegrees(double inputDegrees, double errorMargin) 
+	{
+		//Now loop until you turn the perfect amount!
+        resetGyro();
+        double gyroAngle = getAngle();
+        
+        boolean direction = false;
+        while (gyroAngle < inputDegrees-errorMargin || gyroAngle > inputDegrees+errorMargin) 
+        {
+        	if (gyroAngle < inputDegrees-errorMargin) 
+        	{
+        		//Turn right
+        		driveArcade(0.0, -0.85);
+        	}
+        	if (gyroAngle > inputDegrees+errorMargin) 
+        	{
+        		//Turn left
+        		driveArcade(0.0, 0.85);
+        	}
+        	gyroAngle = getAngle();
+            System.out.println(gyroAngle);
+        }
 	}
 	
 }
