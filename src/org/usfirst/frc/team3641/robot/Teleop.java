@@ -32,7 +32,7 @@ public class Teleop
 		else
 		{
 			Tracking.resetState();
-			if(Constants.usingPMW)
+			if(Constants.runningAleksBot)
 			{
 				DriveBase.driveArcade(operator.getZAxis(), operator.getYAxis());
 			} 

@@ -8,7 +8,7 @@ public class Robot extends IterativeRobot
 	
 	public void robotInit()
 	{	
-		Constants.usingPMW = SmartDashboard.getBoolean("Using PWM?", false);
+		Constants.runningAleksBot = SmartDashboard.getBoolean("Using PWM?", false);
     	Teleop.getInstance();
     	DriveBase.getInstance();
     	Tracking.getInstance();

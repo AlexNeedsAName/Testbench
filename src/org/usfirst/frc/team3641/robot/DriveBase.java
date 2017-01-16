@@ -25,7 +25,7 @@ public class DriveBase
 	private DriveBase()
 	{
 		gyro = new AHRS(SerialPort.Port.kMXP);
-		if(Constants.usingPMW)
+		if(Constants.runningAleksBot)
 		{
 			PWMleft = new Victor(Constants.LEFT_VICTOR);
 			PWMleftSlave = new Victor(Constants.LEFT_SLAVE_VICTOR);

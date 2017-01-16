@@ -2,7 +2,7 @@ package org.usfirst.frc.team3641.robot;
 
 public class Constants
 {
-	public static boolean usingPMW;
+	public static boolean runningAleksBot;
 	
 	public static final int HIGH = 1;
 	public static final int LOW = 0;
