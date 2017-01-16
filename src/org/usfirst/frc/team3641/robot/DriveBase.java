@@ -3,6 +3,7 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.Victor;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 public class DriveBase
 {
@@ -10,6 +11,7 @@ public class DriveBase
 	private static CANTalon left, leftSlave, right, rightSlave;
 	private static Victor PWMleft, PWMleftSlave, PWMright, PWMrightSlave;
 	private static AHRS gyro;
+	private static ADXRS450_Gyro SPIGyro;
 	private static double angle;
 	private static boolean highGear = false;
 	private static boolean autoShift = true;
@@ -31,6 +33,8 @@ public class DriveBase
 			PWMleftSlave = new Victor(Constants.LEFT_SLAVE_VICTOR);
 			PWMright = new Victor(Constants.RIGHT_VICTOR);
 			PWMrightSlave = new Victor(Constants.RIGHT_SLAVE_VICTOR);
+			
+			SPIGyro = new ADXRS450_Gyro();
 		}
 		left = new CANTalon(Constants.LEFT_TALON);
 		leftSlave = new CANTalon(Constants.LEFT_SLAVE_TALON);
@@ -77,7 +81,7 @@ public class DriveBase
 	
 	private static void setMotors(double leftPower, double rightPower)
 	{
-		if(Constants.usingPMW)
+		if(Constants.runningAleksBot)
 		{
 			PWMleft.set(leftPower);
 			PWMleftSlave.set(leftPower);
@@ -95,7 +99,14 @@ public class DriveBase
 	
 	public static void readGyro()
 	{
-		angle = gyro.getAngle(); 
+		if(Constants.runningAleksBot)
+		{
+			angle = SPIGyro.getAngle();
+		}
+		else
+		{
+			angle = gyro.getAngle();
+		}
 	}
 	
 	public static double getAngle()
