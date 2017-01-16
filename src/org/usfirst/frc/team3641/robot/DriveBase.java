@@ -152,10 +152,9 @@ public class DriveBase
 	public static void turnDegrees(double inputDegrees, double errorMargin) 
 	{
 		//Now loop until you turn the perfect amount!
-        resetGyro();
-        double gyroAngle = getAngle();
+        SPIGyro.reset(); //resetGyro();
+        double gyroAngle = SPIGyro.getAngle();//getAngle();
         
-        boolean direction = false;
         while (gyroAngle < inputDegrees-errorMargin || gyroAngle > inputDegrees+errorMargin) 
         {
         	if (gyroAngle < inputDegrees-errorMargin) 
@@ -168,9 +167,10 @@ public class DriveBase
         		//Turn left
         		setMotors(-0.7, -0.8);
         	}
-        	gyroAngle = getAngle();
+        	gyroAngle = SPIGyro.getAngle(); //getAngle();
             System.out.println(gyroAngle);
         }
+        setMotors(0, 0);
 	}
 	
 }

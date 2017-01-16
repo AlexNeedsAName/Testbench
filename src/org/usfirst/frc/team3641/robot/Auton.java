@@ -9,7 +9,7 @@ public class Auton
 	private static double initalEncoder;
 	private static double finalEncoder;
 	
-	private static boolean turn = false;
+	public static UDP udp;
 	
 	public static Auton getInstance()
 	{
@@ -32,10 +32,21 @@ public class Auton
 				crossBaseline();
 				break;
 			case Constants.LINE_ALIGN:
-				if (turn == false) {
-		    		DriveBase.turnDegrees(4, 2);
-		    		turn = true;
-		    	}
+					if(udp == null) udp = new UDP("beaglebone.local", 3641);
+					
+					//Request info about line position
+					udp.sendData("0");
+					
+					String receivedData = udp.getData();
+					if (receivedData != null) {
+						//This code allows for the incoming data to split up into parts by spaces
+				        String[] parts = receivedData.split(" ");
+				        String part1 = parts[0];
+				        double part1_double = Double.parseDouble(part1);
+				        System.out.println("RECEIVED: " + part1);
+						
+				        DriveBase.turnDegrees(part1_double, 2);
+					}
 				break;
 
 		}

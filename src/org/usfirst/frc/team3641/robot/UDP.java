@@ -18,7 +18,7 @@ public class UDP
 		{
 			port = Port;
 			address = InetAddress.getByName(IP);
-			socket = new DatagramSocket();
+			socket = new DatagramSocket(3641);
 			buf = new byte[256];
 			socket.setSoTimeout(1);
 		}
