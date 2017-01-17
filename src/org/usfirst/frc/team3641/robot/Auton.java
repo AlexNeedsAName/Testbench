@@ -8,11 +8,13 @@ public class Auton
 	private static boolean alreadyDriving = false;
 	private static double initalEncoder;
 	private static double finalEncoder;
+	private static boolean runOnce;
 	
 	public static UDP udp;
 	
 	public static Auton getInstance()
 	{
+		runOnce = false;
 		if(instance == null) instance = new Auton();
 		return instance;
 	}
@@ -35,10 +37,16 @@ public class Auton
 					if(udp == null) udp = new UDP("beaglebone.local", 3641);
 					
 					//Request info about line position
-					udp.sendData("0");
+					if (runOnce == false) 
+					{
+						udp.sendData("1");
+						runOnce = true;
+					}
 					
 					String receivedData = udp.getData();
-					if (receivedData != null) {
+					
+			        if (receivedData != null) 
+			        {
 						//This code allows for the incoming data to split up into parts by spaces
 				        String[] parts = receivedData.split(" ");
 				        String part1 = parts[0];
@@ -86,7 +94,6 @@ public class Auton
 			return false;
 		}
 		else return true;
-		
 		
 	}
 
