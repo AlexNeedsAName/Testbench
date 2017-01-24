@@ -26,6 +26,8 @@ public class Auton
 	
 	public static void run(int autonMode)
 	{
+		String receivedData;
+		Boolean continueMouseControl = true;
 		switch(autonMode)
 		{
 			case Constants.DO_NOTHING:
@@ -43,7 +45,7 @@ public class Auton
 						runOnce = true;
 					}
 					
-					String receivedData = udp.getData();
+					receivedData = udp.getData();
 					
 			        if (receivedData != null) 
 			        {
@@ -55,6 +57,45 @@ public class Auton
 						
 				        DriveBase.turnDegrees(part1_double, 2);
 					}
+				break;
+			case Constants.MOUSE_CONTROL:
+				if(udp == null) udp = new UDP("beaglebone.local", 3641);
+				
+				//Request info about line position
+				if (runOnce == false) 
+				{
+					udp.sendData("1");
+					runOnce = true;
+				}
+				
+				while (continueMouseControl == true) 
+				{
+					receivedData = udp.getData();
+					
+					if (receivedData != null) 
+			        {
+						//This code allows for the incoming data to split up into parts by spaces
+				        String[] parts = receivedData.split(" ");
+				        String xQue = parts[0];
+				        double xQue_double = Double.parseDouble(xQue);
+				        System.out.println("RECEIVED: " + xQue);
+						
+				        if (xQue_double < 0) 
+				        {
+				        	DriveBase.setMotors(-0.7, -0.8);
+				        }
+				        if (xQue_double > 0) 
+				        {
+				        	DriveBase.setMotors(0.7, 0.8);
+				        }
+				        if (xQue_double == 0) {
+				        	DriveBase.setMotors(0, 0);
+				        }
+				        //xQue_double = xQue_double*0.25;
+				        //DriveBase.turnDegrees(xQue_double, 2);
+					}
+				}
+				
 				break;
 
 		}

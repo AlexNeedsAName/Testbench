@@ -79,7 +79,7 @@ public class DriveBase
 		else setMotors(leftPower, rightPower);
 	}
 	
-	private static void setMotors(double leftPower, double rightPower)
+	public static void setMotors(double leftPower, double rightPower)
 	{
 		if(Constants.runningAleksBot)
 		{

@@ -66,6 +66,7 @@ public class Constants
 	public static final int DO_NOTHING = 0;
 	public static final int CROSS_BASELINE = 1;
 	public static final int LINE_ALIGN = 2;
+	public static final int MOUSE_CONTROL = 3;
 
 	
 	
