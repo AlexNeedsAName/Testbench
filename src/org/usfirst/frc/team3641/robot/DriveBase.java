@@ -151,8 +151,9 @@ public class DriveBase
 	
 	public static void turnDegrees(double inputDegrees, double errorMargin) 
 	{
-		SPIgyro.reset(); //resetGyro();
-        double gyroAngle = SPIgyro.getAngle();
+		resetGyro();
+		readGyro();
+		double gyroAngle = getAngle();
         
         while (gyroAngle < inputDegrees-errorMargin || gyroAngle > inputDegrees+errorMargin) 
         {
@@ -166,7 +167,8 @@ public class DriveBase
         		//Turn left
         		driveArcade(0, -0.8);
         	}
-        	gyroAngle = SPIgyro.getAngle();
+    		readGyro();
+    		gyroAngle = getAngle();
         }
         driveArcade(0, 0);
 	}
