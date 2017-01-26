@@ -34,7 +34,7 @@ public class Teleop
 			Tracking.resetState();
 			if(Constants.runningAleksBot)
 			{
-				DriveBase.driveArcade(operator.getZAxis(), operator.getYAxis());
+				DriveBase.driveArcade(operator.getYAxis(), operator.getZAxis());
 			} 
 			else
 			{

@@ -85,8 +85,8 @@ public class DriveBase
 		{
 			PWMleft.set(leftPower);
 			PWMleftSlave.set(leftPower);
-			PWMright.set(rightPower);
-			PWMrightSlave.set(rightPower);
+			PWMright.set(-rightPower);
+			PWMrightSlave.set(-rightPower);
 		}
 		else
 		{
@@ -159,16 +159,16 @@ public class DriveBase
         	if (gyroAngle < inputDegrees-errorMargin) 
         	{
         		//Turn right
-        		setMotors(0.7, 0.8);
+        		driveArcade(0, 0.8);
         	}
         	if (gyroAngle > inputDegrees+errorMargin) 
         	{
         		//Turn left
-        		setMotors(-0.7, -0.8);
+        		driveArcade(0, -0.8);
         	}
         	gyroAngle = SPIgyro.getAngle();
         }
-        setMotors(0, 0);
+        driveArcade(0, 0);
 	}
 	
 }

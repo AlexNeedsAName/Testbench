@@ -22,7 +22,7 @@ public class Robot extends IterativeRobot
 
     public void autonomousPeriodic()
     {
-    	Auton.run(3);
+    	Auton.run(4);
     }
 
     public void teleopPeriodic()
