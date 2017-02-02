@@ -7,7 +7,7 @@ public class Dashboard
 
 	public static Dashboard getInstance()
 	{
-		if(instance == null) Dashboard.getInstance();
+		if(instance == null) instance = new Dashboard();
 		return instance;
 	}
 
