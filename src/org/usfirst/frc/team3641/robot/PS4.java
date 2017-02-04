@@ -64,11 +64,11 @@ public class PS4 extends Joystick
 	}
 	public double getLeftTrigger()
 	{
-		return leftTrigger;
+		return leftTrigger+.25;
 	}
 	public double getRightTrigger()
 	{
-		return rightTrigger;
+		return rightTrigger+.25;
 	}
 	public boolean getSquareButton()
 	{

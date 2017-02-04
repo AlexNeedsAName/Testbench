@@ -3,14 +3,17 @@ package org.usfirst.frc.team3641.robot;
 public class Constants
 {
 	public static final int PS4_PORT = 0;
+	public static final int E3D_PORT = 1;
 	
-	public static final double SHOOTER_KP = 0.00003;
-	public static final double SHOOTER_KI = 0;//0.0000025;
-	public static final double SHOOTER_KD = 0;//0.00000025;
-	public static final double SHOOTER_FF = 5500;
+	public static final double SHOOTER_KP = 0.000005;
+	public static final double SHOOTER_KI = 0.0000006;
+	public static final double SHOOTER_KD = 0.00000003;
+	public static final double SHOOTER_FF = 1800;
+	
+	public static final double SHOOTER_MAX_RPM = SHOOTER_FF;
 	
 	
-	public static final double ENCODER_RATE_MULTIPLIER = -7.5; // ticks/s * 60s/min * 1rev/8ticks = 7.5 RPM 
+	public static final double ENCODER_RATE_MULTIPLIER = 7.5; // ticks/s * 60s/min * 1rev/8ticks = 7.5 RPM 
 	//55430 = 730
 	//Talons
 	public static final int LEFT_TALON = 1;
