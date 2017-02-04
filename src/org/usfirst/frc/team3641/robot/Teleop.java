@@ -31,14 +31,13 @@ public class Teleop
 		Sensors.poll();
 		
 		double throttle = operator.getThrottle();
-		SmartDashboard.putNumber("Throttle", throttle);
+		SmartDashboard.putNumber("Throttle", (int) (throttle * Constants.SHOOTER_MAX_RPM));
 		
 		if(dualshock.getTriangleButton()) Shooter.set(dashboardPower);
 		else if(operator.getButton(12)) Shooter.setRPM((int) (throttle * Constants.SHOOTER_MAX_RPM));
 		else if(operator.getButton(11)) Shooter.set(throttle);
 		else Shooter.reset();
 		
-		SmartDashboard.putBoolean("Circle Button Pressed", dualshock.getCircleButton());
 	}
 	
 }
