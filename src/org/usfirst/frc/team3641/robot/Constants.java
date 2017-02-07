@@ -6,11 +6,11 @@ public class Constants
 	public static final int E3D_PORT = 1;
 	
 	public static final double SHOOTER_KP = 0.00002;
-	public static final double SHOOTER_KI = 0.000005;
-	public static final double SHOOTER_KD = 0.0000004;
-	public static final double SHOOTER_FF = 2200;
+	public static final double SHOOTER_KI = 0.000002;
+	public static final double SHOOTER_KD = 0.0000002;
+	public static final double SHOOTER_FF = 3700;
 	
-	public static final double SHOOTER_MAX_RPM = 2200;
+	public static final double SHOOTER_MAX_RPM = 3500;
 	
 	
 	public static final double ENCODER_RATE_MULTIPLIER = 7.5; // ticks/s * 60s/min * 1rev/8ticks = 7.5 RPM 

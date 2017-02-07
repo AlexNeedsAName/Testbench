@@ -27,7 +27,7 @@ public class Shooter
 	
 	public static double getEncoderRate()
 	{
-		return right.getEncVelocity() * Constants.ENCODER_RATE_MULTIPLIER;
+		return - right.getEncVelocity() * Constants.ENCODER_RATE_MULTIPLIER;
 	}
 	
 	public static void setRPM(double target)

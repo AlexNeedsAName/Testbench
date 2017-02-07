@@ -31,7 +31,7 @@ public class Teleop
 		Sensors.poll();
 		
 		double throttle = operator.getThrottle();
-		SmartDashboard.putNumber("Throttle", (int) (throttle * Constants.SHOOTER_MAX_RPM));
+		SmartDashboard.putNumber("Throttle", throttle);
 		
 		if(dualshock.getTriangleButton()) Shooter.set(dashboardPower);
 		else if(operator.getButton(12)) Shooter.setRPM((int) (throttle * Constants.SHOOTER_MAX_RPM));
